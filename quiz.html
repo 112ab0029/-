@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>香氛心理測驗 - Silva Pure</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: "微軟正黑體", Arial, sans-serif;
+        }
+
+        body {
+            background-color: #fafafa;
+            color: #2c4c2c;
+        }
+
+        nav {
+            background-color: white;
+            padding: 20px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 100;
+        }
+
+        nav ul {
+            display: flex;
+            justify-content: center;
+            list-style: none;
+            gap: 30px;
+        }
+
+        nav a {
+            text-decoration: none;
+            color: #2c4c2c;
+            font-weight: 500;
+        }
+
+        .quiz-container {
+            max-width: 800px;
+            margin: 100px auto 50px;
+            padding: 0 20px;
+        }
+
+        .quiz-header {
+            text-align: center;
+            margin-bottom: 50px;
+            padding: 30px;
+            background-color: #e8f0e8;
+            border-radius: 15px;
+        }
+
+        .quiz-header h1 {
+            font-size: 2.5em;
+            margin-bottom: 20px;
+        }
+
+        .quiz-header p {
+            color: #5a7a5a;
+            font-size: 1.2em;
+        }
+
+        .question-card {
+            background-color: white;
+            border-radius: 15px;
+            padding: 30px;
+            margin-bottom: 30px;
+            box-shadow: 0 2px 15px rgba(0,0,0,0.08);
+            display: none;
+        }
+
+        .question-card.active {
+            display: block;
+        }
+
+        .question {
+            font-size: 1.3em;
+            margin-bottom: 20px;
+            color: #2c4c2c;
+        }
+
+        .options {
+            display: grid;
+            gap: 15px;
+        }
+
+        .option-button {
+            padding: 15px 20px;
+            background-color: #e8f0e8;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            text-align: left;
+            font-size: 1.1em;
+            transition: all 0.3s ease;
+        }
+
+        .option-button:hover {
+            background-color: #d0e0d0;
+            transform: translateX(5px);
+        }
+
+        .result-section {
+            display: none;
+            background-color: white;
+            border-radius: 15px;
+            padding: 40px;
+            margin-top: 30px;
+            text-align: center;
+        }
+
+        .result-section h2 {
+            color: #2c4c2c;
+            margin-bottom: 20px;
+            font-size: 2em;
+        }
+
+        .result-section p {
+            line-height: 1.8;
+            margin-bottom: 20px;
+        }
+
+        .result-image {
+            width: 200px;
+            height: 200px;
+            object-fit: cover;
+            border-radius: 50%;
+            margin: 20px auto;
+        }
+
+        .scent-recommendation {
+            background-color: #e8f0e8;
+            padding: 20px;
+            border-radius: 10px;
+            margin-top: 20px;
+        }
+
+        footer {
+            background-color: #2c4c2c;
+            color: white;
+            text-align: center;
+            padding: 30px 20px;
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <ul>
+            <li><a href="index.html">首頁</a></li>
+            <li><a href="brand-story.html">品牌故事</a></li>
+            <li><a href="products.html">產品系列</a></li>
+            <li><a href="quiz.html">香氛測驗</a></li>
+        </ul>
+    </nav>
+
+    <div class="quiz-container">
+        <div class="quiz-header">
+            <h1>Silva Pure 香氛心理測驗</h1>
+            <p>從一點點心情，找到你靈魂中的專屬香氣</p>
+        </div>
+
+        <div class="question-card active" data-question="1">
+            <div class="question">Q1. 如果今天有一個下午完全空下來，你最想怎麼安排？</div>
+            <div class="options">
+                <button class="option-button" data-answer="A">A. 去植物園散步，感受陽光和草香 🌿</button>
+                <button class="option-button" data-answer="B">B. 躲進安靜的咖啡廳，點杯拿鐵看書 ☕</button>
+                <button class="option-button" data-answer="C">C. 在家耍廢追劇、點香氛蠟燭放鬆 🛋</button>
+                <button class="option-button" data-answer="D">D. 去戶外冒險，爬山或騎單車流汗一下 🚴</button>
+            </div>
+        </div>
+
+        <div class="question-card" data-question="2">
+            <div class="question">Q2. 最近的你，最常感受到哪種情緒？</div>
+            <div class="options">
+                <button class="option-button" data-answer="A">A. 想放空、需要安靜與喘息 🕊</button>
+                <button class="option-button" data-answer="B">B. 有點悶、想要提振精神 🌞</button>
+                <button class="option-button" data-answer="C">C. 想被療癒、需要一些溫柔擁抱 🫂</button>
+                <button class="option-button" data-answer="D">D. 想更有力量與自信 💼</button>
+            </div>
+        </div>
+
+        <div class="question-card" data-question="3">
+            <div class="question">Q3. 當你感到壓力時，你通常會怎麼做？</div>
+            <div class="options">
+                <button class="option-button" data-answer="A">A. 洗個熱水澡＋點精油舒壓 🛁</button>
+                <button class="option-button" data-answer="B">B. 出門散步到附近公園，吸一口空氣 🍃</button>
+                <button class="option-button" data-answer="C">C. 躺在沙發上，播放自己喜歡的音樂 🎧</button>
+                <button class="option-button" data-answer="D">D. 打給朋友大聊一場，讓煩惱蒸發 📞</button>
+            </div>
+        </div>
+
+        <div class="question-card" data-question="4">
+            <div class="question">Q4. 你最偏好的香氣類型是？</div>
+            <div class="options">
+                <button class="option-button" data-answer="A">A. 清新自然的森林草木調 🌲</button>
+                <button class="option-button" data-answer="B">B. 乾淨明亮的果香清爽調 🍊</button>
+                <button class="option-button" data-answer="C">C. 溫柔療癒的花香調 🌸</button>
+                <button class="option-button" data-answer="D">D. 獨特迷人的木質辛香調 🌿</button>
+            </div>
+        </div>
+
+        <div class="question-card" data-question="5">
+            <div class="question">Q5. 以下哪句話，最能代表你理想的生活狀態？</div>
+            <div class="options">
+                <button class="option-button" data-answer="A">A. 靜靜生活、穩定踏實</button>
+                <button class="option-button" data-answer="B">B. 充滿朝氣、明亮有活力</button>
+                <button class="option-button" data-answer="C">C. 柔和平衡、擁抱情緒</button>
+                <button class="option-button" data-answer="D">D. 沉穩自信、散發魅力</button>
+            </div>
+        </div>
+
+        <div class="result-section">
+            <h2>你的香氛個性分析</h2>
+            <div class="result-content"></div>
+        </div>
+    </div>
+
+    <footer>
+        <p>© 2024 Silva Pure. All rights reserved.</p>
+    </footer>
+
+    <script>
+        const quizData = {
+            answers: [],
+            currentQuestion: 1,
+            totalQuestions: 5
+        };
+
+        const results = {
+            A: {
+                type: "森林靈魂型",
+                description: "你需要安靜、平衡、自然感。",
+                recommendation: "適合香氛：薰衣草森林、雪松與迷迭香",
+                quote: "讓氣味像森林一樣，靜靜地照顧你。",
+            },
+            B: {
+                type: "清晨活力型",
+                description: "你是充滿動能與陽光的人！",
+                recommendation: "適合香氛：晨露柑橘、青蘋果羅勒",
+                quote: "早晨的第一口深呼吸，成為你一整天的能量來源。",
+            },
+            C: {
+                type: "療癒感性型",
+                description: "你溫柔、重視內在感受，香氣是你的情緒療癒劑。",
+                recommendation: "適合香氛：白茶茉莉、玫瑰天竺葵",
+                quote: "氣味如擁抱，溫柔安放每一份情緒。",
+            },
+            D: {
+                type: "低調有型型",
+                description: "你是沉穩內斂、獨特有魅力的存在。",
+                recommendation: "適合香氛：黑胡椒香根草、海鹽鼠尾草",
+                quote: "不張揚，卻讓人忍不住想靠近。",
+            }
+        };
+
+        // 為所有選項按鈕添加點擊事件
+        document.querySelectorAll('.option-button').forEach(button => {
+            button.addEventListener('click', function() {
+                const answer = this.dataset.answer;
+                const questionNumber = parseInt(this.closest('.question-card').dataset.question);
+                
+                // 記錄答案
+                quizData.answers[questionNumber - 1] = answer;
+                
+                // 如果不是最後一題，顯示下一題
+                if (questionNumber < quizData.totalQuestions) {
+                    document.querySelector(`[data-question="${questionNumber}"]`).classList.remove('active');
+                    document.querySelector(`[data-question="${questionNumber + 1}"]`).classList.add('active');
+                } else {
+                    // 如果是最後一題，計算結果
+                    showResult();
+                }
+            });
+        });
+
+        function showResult() {
+            // 隱藏最後一個問題
+            document.querySelector('.question-card.active').classList.remove('active');
+            
+            // 計算每個選項出現的次數
+            const answerCounts = quizData.answers.reduce((acc, curr) => {
+                acc[curr] = (acc[curr] || 0) + 1;
+                return acc;
+            }, {});
+
+            // 找出出現最多次的選項
+            let maxCount = 0;
+            let resultType = 'A';
+            for (let answer in answerCounts) {
+                if (answerCounts[answer] > maxCount) {
+                    maxCount = answerCounts[answer];
+                    resultType = answer;
+                }
+            }
+
+            // 獲取結果數據
+            const result = results[resultType];
+
+            // 構建結果HTML
+            const resultHTML = `
+                <h3>${result.type}</h3>
+                <p>${result.description}</p>
+                <div class="scent-recommendation">
+                    <p>${result.recommendation}</p>
+                    <p><em>"${result.quote}"</em></p>
+                </div>
+                <a href="products.html" class="cta-button" style="display: inline-block; margin-top: 20px;">
+                    探索推薦香氛
+                </a>
+            `;
+
+            // 顯示結果
+            const resultSection = document.querySelector('.result-section');
+            resultSection.querySelector('.result-content').innerHTML = resultHTML;
+            resultSection.style.display = 'block';
+        }
+    </script>
+</body>
+</html> 

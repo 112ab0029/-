@@ -1,0 +1,366 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>產品系列 - Silva Pure</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: "微軟正黑體", Arial, sans-serif;
+        }
+
+        body {
+            background-color: #fafafa;
+            color: #2c4c2c;
+        }
+
+        .section {
+            padding: 80px 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+            margin-top: 80px;
+        }
+
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-top: 50px;
+        }
+
+        .product-card {
+            background-color: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 2px 15px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease;
+        }
+
+        .product-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .product-card img {
+            width: 100%;
+            height: 250px;
+            object-fit: cover;
+        }
+
+        .product-info {
+            padding: 20px;
+        }
+
+        .product-info h3 {
+            margin-bottom: 15px;
+            color: #2c4c2c;
+        }
+
+        .scent-name {
+            cursor: pointer;
+            padding: 8px 0;
+            transition: color 0.3s ease;
+        }
+
+        .scent-name:hover {
+            color: #5a7a5a;
+        }
+
+        /* Modal 樣式 */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.7);
+            z-index: 1000;
+        }
+
+        .modal-content {
+            position: relative;
+            background-color: #f5f8f5;
+            margin: 50px auto;
+            padding: 40px;
+            width: 90%;
+            max-width: 800px;
+            border-radius: 15px;
+            max-height: 90vh;
+            overflow-y: auto;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.15);
+        }
+
+        .close-button {
+            position: absolute;
+            right: 20px;
+            top: 20px;
+            font-size: 24px;
+            cursor: pointer;
+            color: #2c4c2c;
+            background: none;
+            border: none;
+            padding: 5px;
+            transition: color 0.3s ease;
+        }
+
+        .close-button:hover {
+            color: #5a7a5a;
+        }
+
+        .modal-header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .modal-header h2 {
+            color: #2c4c2c;
+            font-size: 2em;
+            margin-bottom: 10px;
+        }
+
+        .scent-details {
+            background-color: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+        }
+
+        .detail-item {
+            margin-bottom: 20px;
+            line-height: 1.8;
+        }
+
+        .detail-item strong {
+            display: block;
+            color: #2c4c2c;
+            margin-bottom: 8px;
+            font-size: 1.1em;
+        }
+
+        nav {
+            background-color: white;
+            padding: 20px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 100;
+        }
+
+        nav ul {
+            display: flex;
+            justify-content: center;
+            list-style: none;
+            gap: 30px;
+        }
+
+        nav a {
+            text-decoration: none;
+            color: #2c4c2c;
+            font-weight: 500;
+            transition: color 0.3s ease;
+        }
+
+        nav a:hover {
+            color: #5a7a5a;
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <ul>
+            <li><a href="index.html">首頁</a></li>
+            <li><a href="brand-story.html">品牌故事</a></li>
+            <li><a href="products.html">產品系列</a></li>
+            <li><a href="quiz.html">香氛測驗</a></li>
+        </ul>
+    </nav>
+    <section class="section">
+        <h2 style="text-align: center; margin-bottom: 50px;">精選系列</h2>
+        <div class="products-grid">
+            <!-- 果香系列 -->
+            <div class="product-card">
+                <img src="citrus.jpg" alt="果香系列">
+                <div class="product-info">
+                    <h3>果香系列</h3>
+                    <p class="scent-name" data-scent="citrus">• 晨露柑橘（Citrus Dew）</p>
+                    <p class="scent-name" data-scent="pear">• 蜜梨白葡萄（Pear & White Grape）</p>
+                    <p class="scent-name" data-scent="apple">• 青蘋果羅勒（Green Apple & Basil）</p>
+                </div>
+            </div>
+
+            <!-- 花香系列 -->
+            <div class="product-card">
+                <img src="lavender.jpg" alt="花香系列">
+                <div class="product-info">
+                    <h3>花香系列</h3>
+                    <p class="scent-name" data-scent="lavender">• 薰衣草森林（Lavender Woods）</p>
+                    <p class="scent-name" data-scent="jasmine">• 白茶茉莉（White Tea & Jasmine）</p>
+                    <p class="scent-name" data-scent="rose">• 玫瑰天竺葵（Rose & Geranium）</p>
+                </div>
+            </div>
+
+            <!-- 中性／男性取向系列 -->
+            <div class="product-card">
+                <img src="cedar.jpg" alt="中性／男性取向系列">
+                <div class="product-info">
+                    <h3>中性／男性取向系列</h3>
+                    <p class="scent-name" data-scent="cedar">• 雪松與迷迭香（Cedar & Rosemary）</p>
+                    <p class="scent-name" data-scent="vetiver">• 黑胡椒香根草（Vetiver & Black Pepper）</p>
+                    <p class="scent-name" data-scent="seasalt">• 海鹽鼠尾草（Sea Salt & Sage）</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Modal 視窗 -->
+    <div id="scentModal" class="modal">
+        <div class="modal-content">
+            <button class="close-button">&times;</button>
+            <div class="modal-header">
+                <p>每一種香氣，都是一段生活片段的記憶</p>
+            </div>
+            <div id="modalContent"></div>
+        </div>
+    </div>
+
+    <script>
+        // 香氛資料
+        const scentData = {
+            citrus: {
+                name: "晨露柑橘 Citrus Dew",
+                notes: "佛手柑、甜橙、薄荷",
+                character: "清新｜明亮｜提神",
+                inspiration: "夏日早晨的第一縷陽光，搭配橙樹下的微風",
+                suitable: "晨型人、需要提振元氣的你",
+                timing: "早晨起床、上班前洗手，瞬間清醒"
+            },
+            pear: {
+                name: "蜜梨白葡萄 Pear & White Grape",
+                notes: "熟梨、白葡萄、淡淡花香",
+                character: "香甜｜柔和｜純淨",
+                inspiration: "午後果園的微風，陽光灑落果實閃著光",
+                suitable: "喜歡果香卻怕太膩的人",
+                timing: "午茶後洗手、甜點時光加分香氣"
+            },
+            apple: {
+                name: "青蘋果羅勒 Green Apple & Basil",
+                notes: "青蘋果、羅勒葉、檸檬皮",
+                character: "清爽｜草本｜層次豐富",
+                inspiration: "義式庭院廚房，蘋果與羅勒交錯的清新氣息",
+                suitable: "喜歡個性果香、有點與眾不同",
+                timing: "忙碌時刻快速轉換心情的秘密武器"
+            },
+            lavender: {
+                name: "薰衣草森林 Lavender Woods",
+                notes: "真正薰衣草、雪松、鼠尾草",
+                character: "療癒｜沉靜｜平衡",
+                inspiration: "黃昏的山林木屋，窗外飄著淡淡花香",
+                suitable: "焦慮、壓力大、需要安撫情緒的人",
+                timing: "睡前、放鬆泡澡前、靜心時刻"
+            },
+            jasmine: {
+                name: "白茶茉莉 White Tea & Jasmine",
+                notes: "茉莉、白茶葉、橙花",
+                character: "優雅｜輕盈｜清雅",
+                inspiration: "乾淨白色窗簾隨風飄，陽光照在玻璃茶杯上",
+                suitable: "喜歡淡香、不愛甜味，追求氣質與低調",
+                timing: "辦公室洗手、任何不想過度張揚的日常"
+            },
+            rose: {
+                name: "玫瑰天竺葵 Rose & Geranium",
+                notes: "保加利亞玫瑰、天竺葵、苦橙葉",
+                character: "浪漫｜溫柔｜草本底蘊",
+                inspiration: "柔光午後，一本書與一杯果茶陪你安靜度過",
+                suitable: "情感豐富、重視自我關懷與儀式感的人",
+                timing: "在洗完碗後／照顧家人前，好好照顧自己一下"
+            },
+            cedar: {
+                name: "雪松與迷迭香 Cedar & Rosemary",
+                notes: "西伯利亞雪松、迷迭香、鼠尾草",
+                character: "木質｜草本｜理性",
+                inspiration: "山間木屋洗手台，窗邊種著新鮮迷迭香",
+                suitable: "追求簡約、個性成熟、不愛甜味香氛者",
+                timing: "清晨／深夜，讓心慢慢歸零"
+            },
+            vetiver: {
+                name: "黑胡椒香根草 Vetiver & Black Pepper",
+                notes: "香根草、黑胡椒、岩蘭草",
+                character: "辛香｜深沉｜個性",
+                inspiration: "城市夜晚，深色襯衫與靜謐玻璃窗邊",
+                suitable: "想要不一樣的香氣印象者、有個性的靈魂",
+                timing: "下班後轉換 mood、約會前展現獨特氣場"
+            },
+            seasalt: {
+                name: "海鹽鼠尾草 Sea Salt & Sage",
+                notes: "海鹽、鼠尾草、白麝香",
+                character: "清新｜涼感｜潔淨",
+                inspiration: "海邊早晨風中微鹹的空氣與沙灘濕潤香",
+                suitable: "喜歡「像沒擦香水但很乾淨」的味道",
+                timing: "運動後洗手／剛洗完衣服時清潔延伸"
+            }
+        };
+
+        // 獲取 modal 元素
+        const modal = document.getElementById('scentModal');
+        const modalContent = document.getElementById('modalContent');
+        const closeButton = document.querySelector('.close-button');
+
+        // 為所有香氛名稱添加點擊事件
+        document.querySelectorAll('.scent-name').forEach(name => {
+            name.addEventListener('click', function() {
+                const scentId = this.dataset.scent;
+                const scent = scentData[scentId];
+                
+                if (scent) {
+                    modalContent.innerHTML = `
+                        <div class="scent-details">
+                            <h2>${scent.name}</h2>
+                            <div class="detail-item">
+                                <strong>氣味筆記</strong>
+                                ${scent.notes}
+                            </div>
+                            <div class="detail-item">
+                                <strong>調性</strong>
+                                ${scent.character}
+                            </div>
+                            <div class="detail-item">
+                                <strong>靈感畫面</strong>
+                                ${scent.inspiration}
+                            </div>
+                            <div class="detail-item">
+                                <strong>適合誰</strong>
+                                ${scent.suitable}
+                            </div>
+                            <div class="detail-item">
+                                <strong>使用時刻</strong>
+                                ${scent.timing}
+                            </div>
+                        </div>
+                    `;
+                    
+                    modal.style.display = 'block';
+                    document.body.style.overflow = 'hidden';
+                }
+            });
+        });
+
+        // 關閉 modal
+        closeButton.addEventListener('click', () => {
+            modal.style.display = 'none';
+            document.body.style.overflow = 'auto';
+        });
+
+        // 點擊 modal 外部關閉
+        window.addEventListener('click', (event) => {
+            if (event.target === modal) {
+                modal.style.display = 'none';
+                document.body.style.overflow = 'auto';
+            }
+        });
+    </script>
+</body>
+</html>
