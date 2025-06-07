@@ -3,7 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Silva Pure｜自然潔淨的優雅之選</title>
+    <title>Silva Pure｜Natural and clean elegant choice</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
     <style>
         * {
             margin: 0;
@@ -19,7 +20,7 @@
 
         .hero {
             background-color: #e8f0e8;
-            padding: 120px 20px;
+            padding: 120px 20px 60px;
             text-align: center;
             background-image: linear-gradient(rgba(255,255,255,0.7), rgba(255,255,255,0.7)), url('forest-bg.jpg');
             background-size: cover;
@@ -28,13 +29,156 @@
 
         .hero h1 {
             font-size: 3em;
-            margin-bottom: 20px;
+            margin-bottom: 30px;
             color: #2c4c2c;
         }
 
         .hero p {
             font-size: 1.4em;
             color: #5a7a5a;
+        }
+
+        .promo-video {
+            width: 100%;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 10px 20px;
+            background-color: #f5f8f5;
+        }
+
+        .video-container {
+            position: relative;
+            width: 100%;
+            padding-bottom: 56.25%; /* 16:9 宽高比 */
+            height: 0;
+            overflow: hidden;
+            border-radius: 15px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+        }
+
+        .video-container video {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .video-controls {
+            position: absolute;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 10;
+            display: flex;
+            gap: 10px;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .video-container:hover .video-controls {
+            opacity: 1;
+        }
+
+        .video-control-btn {
+            background: rgba(255, 255, 255, 0.8);
+            border: none;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+        }
+
+        .video-control-btn:hover {
+            background: rgba(255, 255, 255, 1);
+            transform: scale(1.1);
+        }
+
+        .video-control-btn i {
+            color: #2c4c2c;
+            font-size: 1.2em;
+        }
+
+        .video-description {
+            text-align: center;
+            margin-top: 30px;
+            color: #2c4c2c;
+            font-size: 1.1em;
+            line-height: 1.6;
+        }
+
+        .instagram-section {
+            background-color: #fafafa;
+            padding: 60px 20px;
+            margin-top: 50px;
+        }
+
+        .instagram-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .instagram-item {
+            position: relative;
+            overflow: hidden;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+        }
+
+        .instagram-item:hover {
+            transform: scale(1.05);
+        }
+
+        .instagram-item img {
+            width: 100%;
+            height: 250px;
+            object-fit: cover;
+        }
+
+        .instagram-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.3);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .instagram-item:hover .instagram-overlay {
+            opacity: 1;
+        }
+
+        .instagram-icon {
+            color: white;
+            font-size: 2em;
+        }
+
+        .instagram-title {
+            text-align: center;
+            margin-bottom: 30px;
+            color: #2c4c2c;
+            font-size: 1.8em;
+        }
+
+        .instagram-subtitle {
+            text-align: center;
+            margin-bottom: 40px;
+            color: #5a7a5a;
+            font-size: 1.1em;
         }
 
         nav {
@@ -136,64 +280,145 @@
             padding: 30px 20px;
             margin-top: 50px;
         }
+
+        .social-links {
+            margin-bottom: 20px;
+        }
+
+        .social-links a {
+            color: white;
+            text-decoration: none;
+            font-size: 1.2em;
+            transition: opacity 0.3s ease;
+        }
+
+        .social-links a:hover {
+            opacity: 0.8;
+        }
     </style>
 </head>
 <body>
     <nav>
         <ul>
-            <li><a href="index.html">首頁</a></li>
-            <li><a href="brand-story.html">品牌故事</a></li>
-            <li><a href="products.html">產品系列</a></li>
-            <li><a href="quiz.html">香氛測驗</a></li>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="brand-story.html">Brand Story</a></li>
+            <li><a href="products.html">Product</a></li>
+            <li><a href="quiz.html">Quiz</a></li>
         </ul>
     </nav>
 
     <div class="hero">
         <h1>Silva Pure</h1>
-        <p>自然潔淨的優雅之選</p>
+        <p>Natural and clean elegant choice</p>
     </div>
+
+    <div class="promo-video">
+        <div class="video-container">
+            <video id="promoVideo" autoplay loop playsinline muted>
+                <source src="test.mp4" type="video/mp4">
+                您的浏览器不支持视频播放。
+            </video>
+            <div class="video-controls">
+                <button class="video-control-btn" id="playPauseBtn">
+                    <i class="fas fa-pause"></i>
+                </button>
+            </div>
+        </div>
+        <div class="video-description">
+            <p>Walk into the world of Silva Pure and feel the gentle blessing from the forest</p>
+            <p>Every drop of fragrance is a gift from nature</p>
+        </div>
+    </div>
+
     <section class="section brand-story">
-        <h2>來自森林的溫柔祝福</h2>
-        <p>有時候，我們太匆忙，忘了生活其實可以很輕、很靜、很自然。<br>
-        Silva Pure 的靈感，來自一場靜靜走進森林的旅行。</p>
-        <a href="brand-story.html" class="cta-button">了解更多</a>
+        <h2>Gentle blessing from the forest</h2>
+        <p>Sometimes, we are so busy that we forget that life can actually be light, quiet and natural.<br>
+        The inspiration of Silva Pure comes from a quiet journey into the forest.</p>
+        <a href="brand-story.html" class="cta-button">Learn More</a>
     </section>
 
     <section class="section">
-        <h2 style="text-align: center; margin-bottom: 50px;">精選系列</h2>
+        <h2 style="text-align: center; margin-bottom: 50px;">Selected Series</h2>
         <div class="products-grid">
             <div class="product-card">
                 <img src="citrus.jpg" alt="晨露柑橘">
                 <div class="product-info">
-                    <h3>果香系列</h3>
-                    <p>清新明亮的早晨能量</p>
-                    <a href="products.html#citrus" class="cta-button">探索香氣</a>
+                    <h3>Fruit Series</h3>
+                    <p>Fresh and Bright Morning Energy</p>
+                    <a href="products.html#citrus" class="cta-button">Explore Scents</a>
                 </div>
             </div>
 
             <div class="product-card">
                 <img src="lavender.jpg" alt="薰衣草森林">
                 <div class="product-info">
-                    <h3>花香系列</h3>
-                    <p>療癒系經典，舒壓柔和</p>
-                    <a href="products.html#lavender" class="cta-button">探索香氣</a>
+                    <h3>Floral Series</h3>
+                    <p>Healing classic, soothing and gentle</p>
+                    <a href="products.html#lavender" class="cta-button">Explore Scents</a>
                 </div>
             </div>
 
             <div class="product-card">
                 <img src="cedar.jpg" alt="雪松與迷迭香">
                 <div class="product-info">
-                    <h3>中性／男性取向系列</h3>
-                    <p>木質草本氣息，沉穩而內斂</p>
-                    <a href="products.html#cedar" class="cta-button">探索香氣</a>
+                    <h3>Neutral/Male Orientation Series</h3>
+                    <p>Wooden herbal scent, calm and restrained</p>
+                    <a href="products.html#cedar" class="cta-button">Explore Scents</a>
                 </div>
             </div>
         </div>
     </section>
 
+
     <footer>
+        <div class="social-links">
+            <a href="https://www.instagram.com/silvapure.daily?igsh=MWJ3NGxxbmpwdWF2Yw==" target="_blank">
+                <i class="fab fa-instagram"></i>
+            </a>
+        </div>
         <p>© 2024 Silva Pure. All rights reserved.</p>
     </footer>
+
+    <script>
+        const video = document.getElementById('promoVideo');
+        const playPauseBtn = document.getElementById('playPauseBtn');
+        const playPauseIcon = playPauseBtn.querySelector('i');
+
+        // 确保视频自动播放
+        function playVideo() {
+            video.play().then(() => {
+                // 播放成功后取消静音
+                video.muted = false;
+            }).catch(function(error) {
+                console.log("视频自动播放失败:", error);
+                // 如果自动播放失败，显示播放按钮
+                playPauseIcon.classList.remove('fa-pause');
+                playPauseIcon.classList.add('fa-play');
+            });
+        }
+
+        // 页面加载完成后尝试播放
+        document.addEventListener('DOMContentLoaded', playVideo);
+        
+        // 用户首次交互时尝试播放
+        document.addEventListener('click', function() {
+            if (video.paused) {
+                playVideo();
+            }
+        }, { once: true });
+
+        playPauseBtn.addEventListener('click', () => {
+            if (video.paused) {
+                video.play();
+                playPauseIcon.classList.remove('fa-play');
+                playPauseIcon.classList.add('fa-pause');
+            } else {
+                video.pause();
+                playPauseIcon.classList.remove('fa-pause');
+                playPauseIcon.classList.add('fa-play');
+            }
+        });
+    </script>
 </body>
 </html>
 
