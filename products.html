@@ -187,8 +187,42 @@
             position: relative;
         }
 
-        .model-container canvas {
-            border-radius: 10px;
+        .model-container iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+
+        /* 隐藏 Sketchfab 界面元素 */
+        .model-container iframe {
+            filter: brightness(1.2) contrast(1.1);
+        }
+
+        .model-container::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 40px;
+            background: linear-gradient(to bottom, rgba(255,255,255,1), rgba(255,255,255,0));
+            z-index: 1;
+            pointer-events: none;
+        }
+
+        .model-container::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 40px;
+            background: linear-gradient(to top, rgba(255,255,255,1), rgba(255,255,255,0));
+            z-index: 1;
+            pointer-events: none;
         }
 
         .audio-player {
@@ -571,7 +605,7 @@
                             <div class="scent-media">
                                 <div class="model-container">
                                     <iframe
-                                        src="https://sketchfab.com/models/${scent.modelUrl}/embed?autostart=1&autospin=1&preload=1&ui_controls=0&ui_inspector=0&ui_infos=0&ui_watermark=0&ui_watermark_link=0&ui_ar=0&ui_help=0&ui_settings=0&ui_vr=0&ui_fullscreen=0&ui_animations=0&ui_theme=dark&transparent=1"
+                                        src="https://sketchfab.com/models/${scent.modelUrl}/embed?autostart=1&autospin=1&preload=1&ui_controls=0&ui_inspector=0&ui_infos=0&ui_watermark=0&ui_watermark_link=0&ui_ar=0&ui_help=0&ui_settings=0&ui_vr=0&ui_fullscreen=0&ui_animations=0&ui_theme=dark&transparent=1&ui_annotations=0&ui_loading=0&ui_stop=0&ui_share=0&ui_related=0&ui_embed=0&ui_share_buttons=0&ui_share_buttons_embed=0&ui_share_buttons_facebook=0&ui_share_buttons_twitter=0&ui_share_buttons_pinterest=0&ui_share_buttons_tumblr=0&ui_share_buttons_reddit=0&ui_share_buttons_linkedin=0&ui_share_buttons_whatsapp=0&ui_share_buttons_email=0&ui_share_buttons_copy=0"
                                         title="3D Model"
                                         frameborder="0"
                                         allowfullscreen
