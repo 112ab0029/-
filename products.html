@@ -172,18 +172,9 @@
         }
 
         .scent-media {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 30px;
-            margin-bottom: 30px;
-        }
-
-        .persona-image {
-            width: 100%;
-            height: 400px;
-            object-fit: cover;
-            border-radius: 10px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
         }
 
         .model-container {
@@ -438,7 +429,7 @@
         let scene, camera, renderer, model;
         
         function initThreeJS(container, modelUrl) {
-            console.log('开始初始化 Three.js，模型路径:', modelUrl);
+            console.log('開始初始化 Three.js，模型路徑:', modelUrl);
             
             try {
                 // 清除之前的渲染器
@@ -461,7 +452,7 @@
                 renderer.setPixelRatio(window.devicePixelRatio);
                 container.appendChild(renderer.domElement);
 
-                // 添加环境光
+                // 添加環境光
                 const ambientLight = new THREE.AmbientLight(0xffffff, 0.7);
                 scene.add(ambientLight);
 
@@ -470,59 +461,59 @@
                 directionalLight.position.set(1, 1, 1);
                 scene.add(directionalLight);
 
-                // 添加一个简单的立方体作为测试
+                // 添加一個簡單的立方體作為測試
                 const geometry = new THREE.BoxGeometry(1, 1, 1);
                 const material = new THREE.MeshPhongMaterial({ color: 0x2c4c2c });
                 const cube = new THREE.Mesh(geometry, material);
                 scene.add(cube);
 
-                // 加载3D模型
+                // 加載3D模型
                 const loader = new THREE.GLTFLoader();
-                console.log('开始加载模型...');
+                console.log('開始加載模型...');
                 
                 loader.load(
                     modelUrl,
                     (gltf) => {
-                        console.log('模型加载成功');
+                        console.log('模型加載成功');
                         if (model) {
                             scene.remove(model);
                         }
                         model = gltf.scene;
                         
-                        // 计算模型的包围盒
+                        // 計算模型的包圍盒
                         const box = new THREE.Box3().setFromObject(model);
                         const center = box.getCenter(new THREE.Vector3());
                         const size = box.getSize(new THREE.Vector3());
                         
-                        // 计算缩放比例
+                        // 計算縮放比例
                         const maxDim = Math.max(size.x, size.y, size.z);
                         const scale = 2 / maxDim;
                         model.scale.set(scale, scale, scale);
                         
-                        // 将模型居中
+                        // 將模型居中
                         model.position.sub(center.multiplyScalar(scale));
                         
                         scene.add(model);
-                        console.log('模型已添加到场景');
+                        console.log('模型已添加到場景');
                         
-                        // 移除测试立方体
+                        // 移除測試立方體
                         scene.remove(cube);
                     },
                     (xhr) => {
-                        console.log('加载进度:', (xhr.loaded / xhr.total * 100) + '%');
+                        console.log('加載進度:', (xhr.loaded / xhr.total * 100) + '%');
                     },
                     (error) => {
-                        console.error('模型加载错误:', error);
+                        console.error('模型加載錯誤:', error);
                         const errorDiv = document.createElement('div');
                         errorDiv.style.color = 'red';
                         errorDiv.style.padding = '20px';
                         errorDiv.style.textAlign = 'center';
-                        errorDiv.textContent = '模型加载失败，请稍后重试';
+                        errorDiv.textContent = '模型加載失敗，請稍後重試';
                         container.appendChild(errorDiv);
                     }
                 );
 
-                // 动画循环
+                // 動畫循環
                 function animate() {
                     requestAnimationFrame(animate);
                     if (model) {
@@ -534,7 +525,7 @@
                 }
                 animate();
 
-                // 添加窗口大小调整监听
+                // 添加窗口大小調整監聽
                 window.addEventListener('resize', () => {
                     camera.aspect = container.clientWidth / container.clientHeight;
                     camera.updateProjectionMatrix();
@@ -542,20 +533,20 @@
                 });
 
             } catch (error) {
-                console.error('Three.js 初始化错误:', error);
+                console.error('Three.js 初始化錯誤:', error);
                 const errorDiv = document.createElement('div');
                 errorDiv.style.color = 'red';
                 errorDiv.style.padding = '20px';
                 errorDiv.style.textAlign = 'center';
-                errorDiv.textContent = '3D 渲染初始化失败，请检查浏览器是否支持 WebGL';
+                errorDiv.textContent = '3D 渲染初始化失敗，請檢查瀏覽器是否支持 WebGL';
                 container.appendChild(errorDiv);
             }
         }
 
-        // 添加音频控制相关变量
+        // 添加音頻控制相關變量
         let currentAudio = null;
 
-        // 音频控制函数
+        // 音頻控制函數
         function setupAudioControl(audioUrl) {
             if (currentAudio) {
                 currentAudio.pause();
@@ -568,7 +559,7 @@
             currentAudio.play();
         }
 
-        // 修改显示modal内容的代码
+        // 修改顯示modal內容的代碼
         document.querySelectorAll('.scent-name').forEach(name => {
             name.addEventListener('click', function() {
                 const scentId = this.dataset.scent;
@@ -578,7 +569,6 @@
                     modalContent.innerHTML = `
                         <div class="scent-details">
                             <div class="scent-media">
-                                <img src="${scent.personaImage}" alt="${scent.name} 拟人化形象" class="persona-image">
                                 <div class="model-container">
                                     <iframe
                                         src="https://sketchfab.com/models/${scent.modelUrl}/embed?autostart=1&autospin=1&preload=1&ui_controls=0&ui_inspector=0&ui_infos=0&ui_watermark=0&ui_watermark_link=0&ui_ar=0&ui_help=0&ui_settings=0&ui_vr=0&ui_fullscreen=0&ui_animations=0&ui_theme=dark&transparent=1"
@@ -624,13 +614,13 @@
                     modal.style.display = 'block';
                     document.body.style.overflow = 'hidden';
 
-                    // 设置背景音频
+                    // 設置背景音頻
                     setupAudioControl(scent.audioUrl);
                 }
             });
         });
 
-        // 修改关闭modal的代码
+        // 修改關閉modal的代碼
         function closeModal() {
             if (currentAudio) {
                 currentAudio.pause();
